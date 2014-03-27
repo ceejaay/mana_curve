@@ -1,5 +1,6 @@
 require 'yaml'
 require 'ascii_charts'
+#the yaml methods are for saving and loading the card database.
 def yaml_save(object, filename)
   File.open filename, 'w' do |f|
     f.write(object.to_yaml)
@@ -10,22 +11,24 @@ def yaml_load(filename)
   yaml_string = File.read filename
   YAML::load yaml_string
 end
-
+#this format string adds 30 spaces to the name. It helps format the list feature.
 def format_string(string)
   while string.length != 30
     string << " "
   end
 end
 
-
+#load the card database
 CARD_DATABASE = yaml_load("card_database.yml")
-
+# a list of variables.
 input = ARGV
 name = nil 
 color = nil
 type = nil
 mana_cost = nil
 
+#the case statement to interpret the incoming ARGV array and the
+#strings/commands inside
 case input[0]
   when "add"
     input.shift
@@ -53,5 +56,6 @@ case input[0]
     puts "commads are 'add', 'list' or 'chart' "
 #this needs some more instruction
 end
+#format and save the database of cards into yaml file.
 CARD_DATABASE.sort_by! {|card| card[:mana_cost] }
 yaml_save(CARD_DATABASE, 'card_database.yml')
