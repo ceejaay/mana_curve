@@ -15,7 +15,7 @@ ruby mana_curve.rbl [COMMANDD] [OPTION(s)]
 
 The commands are:
 
-add - This adds a card to the database. Example
+*add - This adds a card to the database. Example
 
 $=> ruby mana_curve.rb add Scorch Walker red creature 4
 
@@ -26,6 +26,6 @@ creature = type of card
 
 These have to be done in this order.
 
-list - use this to list all the cards you've input.
+*list - use this to list all the cards you've input.
 
-chart - this command displays a chart showing the mana curve of your deck.
+*chart - this command displays a chart showing the mana curve of your deck.
