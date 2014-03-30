@@ -1,5 +1,6 @@
 require 'yaml'
 require 'ascii_charts'
+require 'json'
 #the yaml methods are for saving and loading the card database.
 def yaml_save(object, filename)
   File.open filename, 'w' do |f|
@@ -18,8 +19,16 @@ def format_string(string)
   end
 end
 
-#load the card database
+def find_card(card_name)
+ card_data = nil
+ JSON_DATA.each {|x| card_data = x if x["name"].downcase == card_name.downcase }
+ card_data
+end
+
+#load the card databases
 CARD_DATABASE = yaml_load("card_database.yml")
+file = File.read("GTC.json")
+JSON_DATA = JSON.parse(file)["cards"] 
 # a list of variables.
 input = ARGV
 name = nil 
