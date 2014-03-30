@@ -22,7 +22,11 @@ end
 def find_card(card_name)
  card_data = nil
  JSON_DATA.each {|x| card_data = x if x["name"].downcase == card_name.downcase }
- card_data
+ if card_data == nil
+   puts "Can't find"
+ else
+   card_data
+ end
 end
 
 #load the card databases
@@ -31,23 +35,15 @@ file = File.read("GTC.json")
 JSON_DATA = JSON.parse(file)["cards"] 
 # a list of variables.
 input = ARGV
-name = nil 
-color = nil
-type = nil
-mana_cost = nil
 
 #the case statement to interpret the incoming ARGV array and the
 #strings/commands inside
 case input[0]
   when "add"
     input.shift
-    mana_cost = input.pop.to_i
-    type = input.pop
-    color = input.pop
-    name = input.join(" ")
-    format_string(name)
-    CARD_DATABASE << {:name => name, :color => color, :type => type, :mana_cost => mana_cost, :id => CARD_DATABASE.length + 1}
-    puts "Card Saved!"
+    card = find_card(input.join(" "))
+    #CARD_DATABASE << {:name => name, :color => color, :type => type, :mana_cost => mana_cost}
+    #puts "Card Saved!"
 
   when "chart"
     chart = []
