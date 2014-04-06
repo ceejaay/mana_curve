@@ -21,12 +21,31 @@ end
 
 def find_card(card_name)
  card_data = nil
- JSON_DATA.each {|x| card_data = x if x["name"].downcase == card_name.downcase }
+ JSON_DATA.each {|x| card_data = x if x["name"] == card_name }
  if card_data == nil
    puts "Can't find"
  else
    card_data
  end
+end
+
+def mana_cost_number(card)
+#this method needs to be able to handle 'X'. right now it counts x as 1
+ mana_cost_integer = 0
+ range = ("1".."9")
+ raw_mana_data = find_card(card)["manaCost"].scan(/\{(.*?)\}/).flatten
+ if range.include?(raw_mana_data[0])
+#if the first item in array is a number string.
+   mana_cost_integer = raw_mana_data[0].to_i
+   raw_mana_data.shift
+ else
+  #if not, then raw mana data is set to 1 integer.
+  mana_cost_integer = 1
+  raw_mana_data.shift
+ end
+ #when the method is done it will return an integer showing the mana cost
+ mana_cost_integer =  mana_cost_integer + raw_mana_data.length
+ mana_cost_integer
 end
 
 #load the card databases
@@ -42,8 +61,10 @@ case input[0]
   when "add"
     input.shift
     card = find_card(input.join(" "))
-    #CARD_DATABASE << {:name => name, :color => color, :type => type, :mana_cost => mana_cost}
-    #puts "Card Saved!"
+    name = find_card(card)
+    puts name
+    CARD_DATABASE <<  { :name => "Hello world", :mana_cost => 5 }
+    puts "Card Saved!"
 
   when "chart"
     chart = []
@@ -64,3 +85,5 @@ end
 #format and save the database of cards into yaml file.
 CARD_DATABASE.sort_by! {|card| card[:mana_cost] }
 yaml_save(CARD_DATABASE, 'card_database.yml')
+#testing things DELETE THEM
+ #JSON_DATA.each {|x| puts x["name"].downcase}
