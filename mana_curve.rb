@@ -54,7 +54,6 @@ file = File.read("GTC.json")
 JSON_DATA = JSON.parse(file)["cards"] 
 # a list of variables.
 input = ARGV
-
 #the case statement to interpret the incoming ARGV array and the
 #strings/commands inside
 case input[0]
@@ -62,9 +61,9 @@ case input[0]
     input.shift
     card = find_card(input.join(" "))
     name = find_card(card)
-    puts name
-    CARD_DATABASE <<  { :name => "Hello world", :mana_cost => 5 }
+    CARD_DATABASE <<  { :name => card["name"], :type => card["type"],  :mana_cost => 5 }
     puts "Card Saved!"
+    puts card
 
   when "chart"
     chart = []
@@ -86,4 +85,3 @@ end
 CARD_DATABASE.sort_by! {|card| card[:mana_cost] }
 yaml_save(CARD_DATABASE, 'card_database.yml')
 #testing things DELETE THEM
- #JSON_DATA.each {|x| puts x["name"].downcase}

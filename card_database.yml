@@ -3,24 +3,21 @@
   :color: red
   :type: i
   :mana_cost: 1
-- :name: This is a test
+- :name: Scorchwalker
+  :type: Creature — Elemental
   :mana_cost: 5
-- :name: 'Scorch Walker                 '
-  :color: red
-  :type: c
+- :name: Scorchwalker
+  :type: Creature — Elemental
   :mana_cost: 5
-  :id: 2
-- :name: This is a test
+- :name: Scorchwalker
+  :type: Creature — Elemental
   :mana_cost: 5
-- :name: Hello world
+- :name: Act of Treason
+  :type: Sorcery
   :mana_cost: 5
-- :name: Hello world
+- :name: Voidwalk
+  :type: Sorcery
   :mana_cost: 5
-- :name: Hello world
-  :mana_cost: 5
-- :name: Hello world
-  :mana_cost: 5
-- :name: Hello world
-  :mana_cost: 5
-- :name: Hello world
+- :name: Smite
+  :type: Instant
   :mana_cost: 5
